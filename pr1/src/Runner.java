@@ -1,13 +1,16 @@
 import by.gsu.mslab.BusinessTrip;
+
+import java.math.BigDecimal;
+
 public class Runner {
     public static void main(String[] args) {
         BusinessTrip[] businessTrips = new BusinessTrip[7];
-        businessTrips[0] = new BusinessTrip( 25000,"Anton Slutsky",50000,5);
-        businessTrips[1] = new BusinessTrip(25000,"Andrey Ivanov",60000,7);
+        businessTrips[0] = new BusinessTrip( new BigDecimal("250"),"Anton Slutsky",new BigDecimal("45.34"),5);
+        businessTrips[1] = new BusinessTrip(new BigDecimal("250"),"Andrey Ivanov",new BigDecimal("60.56"),7);
         businessTrips[2] = null;
-        businessTrips[3] = new BusinessTrip(25000,"Ivan Petrov", 45000,4);
-        businessTrips[4] = new BusinessTrip(25000,"Alexander Bobrov",52000,5);
-        businessTrips[5] = new BusinessTrip(25000,"Andrey Sidirov",49000,4);
+        businessTrips[3] = new BusinessTrip(new BigDecimal("250"),"Ivan Petrov", new BigDecimal("46.10"),4);
+        businessTrips[4] = new BusinessTrip(new BigDecimal("250"),"Alexander Bobrov",new BigDecimal("52.73"),5);
+        businessTrips[5] = new BusinessTrip(new BigDecimal("250"),"Andrey Sidirov",new BigDecimal("49.5"),4);
         businessTrips[6] = new BusinessTrip();
 
         for (BusinessTrip businessTrip: businessTrips){
@@ -17,7 +20,7 @@ public class Runner {
             }
         }
 
-        businessTrips[businessTrips.length-1].setTransportationExpenses(99999);
+        businessTrips[businessTrips.length-1].setTransportationExpenses(new BigDecimal("99.99"));
 
         System.out.println("Duration = " + (businessTrips[0].getNumberOfDay() + businessTrips[1].getNumberOfDay()));
 
@@ -30,27 +33,26 @@ public class Runner {
 
         System.out.println("");
 
-        int sum = 0;
+        BigDecimal sum = new BigDecimal("0");
 
         for(BusinessTrip businessTrip: businessTrips){
             if( businessTrip!= null){
-                sum += businessTrip.getTotal();
+                sum = sum.add(businessTrip.getTotal());
             }
         }
 
-        System.out.println("total expenses = " + sum);
+        System.out.println("Total expenses = " + sum);
+        System.out.println("");
 
-        int maxSum = 0;
+        BigDecimal maxSum = new BigDecimal("0");
 
         for(BusinessTrip businessTrip: businessTrips){
             if( businessTrip!= null){
-                if(businessTrip.getTotal() > maxSum){
+                if (maxSum.compareTo(businessTrip.getTotal())==(-1)){
                     maxSum = businessTrip.getTotal();
                 }
             }
         }
-
         System.out.println("Maximum = " + maxSum);
-
     }
 }
