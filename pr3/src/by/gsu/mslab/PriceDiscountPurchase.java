@@ -4,39 +4,37 @@ import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class PriceDiscountPurchase extends GeneralPurchase {
-    private BigDecimal discount;
+    private int discount;
 
     public PriceDiscountPurchase() {
         super();
     }
 
-    public PriceDiscountPurchase(String commodityName, BigDecimal priceOfUnit, int numberOfPurchasedUnits, BigDecimal discount) {
+    public PriceDiscountPurchase(String commodityName, int priceOfUnit, int numberOfPurchasedUnits, int discount) {
         super(commodityName, priceOfUnit, numberOfPurchasedUnits);
         this.discount = discount;
     }
 
     public PriceDiscountPurchase(Scanner sc){
-        super(sc.next(), sc.nextBigDecimal(), sc.nextInt());
-        this.discount = sc.nextBigDecimal();
+        super(sc.next(), sc.nextInt(), sc.nextInt());
+        this.discount = sc.nextInt();
     }
 
-    public BigDecimal getDiscount() {
+    public int getDiscount() {
         return discount;
     }
 
-    public void setDiscount(BigDecimal discount) {
+    public void setDiscount(int discount) {
         this.discount = discount;
     }
 
     @Override
-    public BigDecimal getCost() {
-        BigDecimal total = super.getCost();
-        total = (total.subtract((new BigDecimal(getNumberOfPurchasedUnits())).multiply(discount)));
-        return total;
+    public int getCost() {
+        return (getPriceOfUnit() - discount) * getNumberOfPurchasedUnits();
     }
 
     @Override
     public String toString() {
-        return super.toString() + "; " + discount.setScale(2,BigDecimal.ROUND_CEILING);
+        return super.toString() + ";" + NewCurrency.Currency(discount);
     }
 }

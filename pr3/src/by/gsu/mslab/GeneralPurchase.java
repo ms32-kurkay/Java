@@ -5,22 +5,21 @@ import java.util.Scanner;
 
 public class GeneralPurchase{
     private String commodityName;
-    private BigDecimal priceOfUnit;
+    private int priceOfUnit;
     private int numberOfPurchasedUnits;
 
     public GeneralPurchase(){
         super();
-        this.priceOfUnit = new BigDecimal("0");
     }
 
-    public GeneralPurchase(String commodityName, BigDecimal priceOfUnit, int numberOfPurchasedUnits) {
+    public GeneralPurchase(String commodityName, int priceOfUnit, int numberOfPurchasedUnits) {
         this.commodityName = commodityName;
         this.priceOfUnit = priceOfUnit;
         this.numberOfPurchasedUnits = numberOfPurchasedUnits;
     }
 
     public GeneralPurchase(Scanner sc){
-        this(sc.next(), sc.nextBigDecimal(), sc.nextInt());
+        this(sc.next(), sc.nextInt(), sc.nextInt());
     }
 
     public String getCommodityName() {
@@ -31,11 +30,11 @@ public class GeneralPurchase{
         this.commodityName = commodityName;
     }
 
-    public BigDecimal getPriceOfUnit() {
+    public int getPriceOfUnit() {
         return priceOfUnit;
     }
 
-    public void setPriceOfUnit(BigDecimal priceOfUnit) {
+    public void setPriceOfUnit(int priceOfUnit) {
         this.priceOfUnit = priceOfUnit;
     }
 
@@ -47,10 +46,8 @@ public class GeneralPurchase{
         this.numberOfPurchasedUnits = numberOfPurchasedUnits;
     }
 
-    public BigDecimal getCost(){
-        BigDecimal total = new BigDecimal("0");
-        total = (priceOfUnit).multiply(new BigDecimal(numberOfPurchasedUnits));
-        return total;
+    public int getCost(){
+        return priceOfUnit * numberOfPurchasedUnits;
     }
 
     @Override
@@ -63,14 +60,15 @@ public class GeneralPurchase{
         GeneralPurchase otherPurchase = (GeneralPurchase) obj;
         return ((commodityName == otherPurchase.commodityName)||
                 (commodityName != null)&&(commodityName.equals(otherPurchase.commodityName))&&
-                        (priceOfUnit != null)&&(priceOfUnit.compareTo(otherPurchase.priceOfUnit) == 0));
+                        (priceOfUnit == otherPurchase.priceOfUnit));
     }
 
     @Override
     public String toString() {
-        return commodityName + "; " +
-                priceOfUnit.setScale(2,BigDecimal.ROUND_DOWN) + "; " +
-                numberOfPurchasedUnits;
+        return commodityName + ";" +
+                NewCurrency.Currency(priceOfUnit) + ";" +
+                numberOfPurchasedUnits + ";" +
+                NewCurrency.Currency(getCost());
     }
 
 }

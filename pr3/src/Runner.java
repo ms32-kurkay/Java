@@ -8,16 +8,16 @@ import by.gsu.mslab.*;
 
 public class Runner {
     public static void main(String[] args){
-        PurchaseFactory pf = new PurchaseFactory();
         Scanner sc =null;
         try{
+            PurchaseFactory pf = new PurchaseFactory();
             sc = new Scanner(new FileReader("src/in.txt"));
             GeneralPurchase[] purchases = new GeneralPurchase[5];
-            BigDecimal maxCost = new BigDecimal("0");
+            int maxCost = 0;
             boolean flag = true;
             for(int i = 0; i < purchases.length; i++){
                 purchases[i] = pf.getClassFromFactory(sc);
-                if(purchases[i].getCost().compareTo(maxCost) > 0){
+                if(purchases[i].getCost() > maxCost){
                     maxCost = purchases[i].getCost();
                 }
                 if(flag){
@@ -25,15 +25,15 @@ public class Runner {
                 }
             }
             for(GeneralPurchase p: purchases){
-                System.out.println(p.toString() + "; " + p.getCost());
+                System.out.println(p.toString() + ";");
             }
 
             if(flag)
-                System.out.println("Equals");
+                System.out.println("All purchases are equal");
             else
-                System.out.println("Not equals");
+                System.out.println("All purchases are not equal");
 
-            System.out.println("Max cost: " + maxCost.setScale(2,BigDecimal.ROUND_CEILING));
+            System.out.println("Max cost of purchase: " + NewCurrency.Currency(maxCost));
 
         }catch (FileNotFoundException e){
             System.err.println("File not founded");
