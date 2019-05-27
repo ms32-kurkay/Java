@@ -1,0 +1,16 @@
+4; 80; 60.5; 6; 4; Kozhara; monolithic house; 112; 
+3; 14; 25.0; 1; 1; Ogorenko; panel house; 74; 
+5; 20; 25.0; 1; 1; Ogorenko; panel house; 74; 
+1; 140; 58.7; 4; 3; Olimpiyskaya; panel house; 80; 
+2; 96; 45.8; 7; 2; Sviridova; brick house; 87; 
+
+List of houses with required count of rooms:
+3; 14; 25.0; 1; 1; Ogorenko; panel house; 74; 
+5; 20; 25.0; 1; 1; Ogorenko; panel house; 74; 
+
+List of houses with required count of rooms and required interval of floors:
+
+List of houses with minimal required area:
+4; 80; 60.5; 6; 4; Kozhara; monolithic house; 112; 
+1; 140; 58.7; 4; 3; Olimpiyskaya; panel house; 80; 
+2; 96; 45.8; 7; 2; Sviridova; brick house; 87; 
