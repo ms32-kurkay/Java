@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Registration</title>
+    <title>Регистрация</title>
 </head>
 <body>
 <form action="/login_register" method="post">
@@ -13,15 +13,15 @@
         </tr>
         <tr>
             <td>
-                username:
+                Логин:
             </td>
             <td>
-                <input type="text" name="username">
+                <input type="text" name="user_name">
             </td>
         </tr>
         <tr>
             <td>
-                password:
+                Пароль:
             </td>
             <td>
                 <input type="password" name="password">
@@ -30,7 +30,7 @@
         <tr>
             <td></td>
             <td>
-                <input type="submit" name="submit" value="Register">
+                <input type="submit" name="reg" value="Зарегистрироваться">
             </td>
         </tr>
     </table>

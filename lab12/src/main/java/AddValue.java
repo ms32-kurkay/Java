@@ -5,35 +5,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/add_value")
 public class AddValue extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
         if(request.getParameter("type") == null && request.getParameter("date") == null && request.getParameter("value") == null){
-            request.setAttribute("message","Null value");
-            request.getRequestDispatcher("add_value").forward(request, response);
+            request.setAttribute("message","Нулевое значение");
+            request.getRequestDispatcher("/add_value").forward(request, response);
         }
-        Meter meter = MeterFactory.createMeter("electricity");
+        String type = request.getParameter("type");
+        Meter meter = MeterFactory.createMeter(type);
         try{
-            if (meter != null) {
-                meter.setValue(Double.parseDouble(request.getParameter("value")));
-            }
+            meter.setValue(Double.parseDouble(request.getParameter("value")));
         }catch (NumberFormatException e){
-            request.setAttribute("message","Incorrect value");
-            request.getRequestDispatcher("add.jsp").forward(request, response);
+            request.setAttribute("message","Неккоректные данные");
+            request.getRequestDispatcher("/add.jsp").forward(request, response);
         }
-        if (meter != null) {
-            meter.setDate(request.getParameter("date"));
-        }
+        meter.setDate(request.getParameter("date"));
         MeterDAO meterDAO = new MeterDAOImplemetation();
-        meterDAO.insertMeter(meter, String.valueOf(session.getAttribute("username")));
-        request.getRequestDispatcher("/electricity").forward(request, response);
+        HttpSession session = request.getSession();
+        String userName = String.valueOf(session.getAttribute("user_name"));
+        meterDAO.insertMeter(meter, userName);
+        response.sendRedirect("/meters");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        MeterDAO meterDAO = new MeterDAOImplemetation();
-        request.setAttribute("types",meterDAO.selectTypes());
         request.getRequestDispatcher("/add.jsp").forward(request, response);
     }
 }

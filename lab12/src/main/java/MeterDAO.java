@@ -1,10 +1,9 @@
 import java.util.List;
 
 public interface MeterDAO {
-    List<Meter> selectMeters(String username, String type);
+    List<Meter> selectMeters(String username);
     int deleteMeter(int id);
     int insertMeter(Meter meter, String username);
-    int updateMeter(Meter meter, String username);
+    int updateMeter(Meter meter);
     Meter selectMeter(int id);
-    List<String> selectTypes();
 }

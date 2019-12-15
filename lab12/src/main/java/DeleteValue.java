@@ -11,7 +11,7 @@ public class DeleteValue extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         MeterDAO meterDAO = new MeterDAOImplemetation();
         meterDAO.deleteMeter(id);
-        request.getRequestDispatcher("/electricity").forward(request, response);
+        response.sendRedirect("/meters");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

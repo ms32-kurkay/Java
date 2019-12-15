@@ -1,6 +1,6 @@
 import java.io.Serializable;
 
-public class Electricity implements Serializable, Meter {
+public class ColdWater implements Serializable, Meter {
     private int id;
     private double value;
     private String date;
@@ -17,7 +17,7 @@ public class Electricity implements Serializable, Meter {
 
     @Override
     public String getType() {
-        return "электричество";
+        return "холодная вода";
     }
 
     @Override
